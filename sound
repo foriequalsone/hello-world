@@ -1,0 +1,18 @@
+#If Win64 Then
+    Private Declare PtrSafe Function PlaySound Lib "winmm.dll" _
+        Alias "PlaySoundA" (ByVal lpszName As String, _
+        ByVal hModule As LongPtr, ByVal dwFlags As Long) As Boolean
+#Else
+    Private Declare Function PlaySound Lib "winmm.dll" _
+        Alias "PlaySoundA" (ByVal lpszName As String, _
+        ByVal hModule As Long, ByVal dwFlags As Long) As Boolean
+#End If
+Const SND_SYNC = &H0
+Const SND_ASYNC = &H1
+Const SND_FILENAME = &H20000
+Function SoundMe() As String
+'Updateby Extendoffice 20161223
+    Call PlaySound("c:\sounds\meeting.wav", _
+      0, SND_ASYNC Or SND_FILENAME)
+    SoundMe = ""
+End Function
